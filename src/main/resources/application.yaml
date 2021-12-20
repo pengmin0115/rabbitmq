@@ -1,0 +1,30 @@
+server:
+  port: 5018
+  tomcat:
+    uri-encoding: utf-8
+    max-threads: 200
+    min-spare-threads: 10
+  servlet:
+    context-path: /rabbitmq
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/rabbit_mq?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: rabbit_mq_server
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: server1
+    listener:
+      simple:
+        concurrency: 3  # 消费者最小数量;
+        max-concurrency: 10 # 消费者最大数量;
+        acknowledge-mode: manual  # 设置手动确认模式;
+logging:
+  root.level: debug
